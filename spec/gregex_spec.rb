@@ -32,7 +32,7 @@ describe Gregex do
   end
 
   describe ".new" do
-    context "with \\w" do
+    context "with \/\\w\/" do
       regex = Gregex.new(/\w/)
       all_downcase_letters.each do |letter|
         it "matches #{letter}" do
@@ -43,6 +43,30 @@ describe Gregex do
       all_capital_letters.each do |letter|
         it "matches #{letter}" do
           expect(regex).to match(letter)
+        end
+      end
+    end
+
+    context "with \/\\w+\/" do
+      describe "matches one or more greek chars" do
+        it "like κλμ" do
+          regex = Gregex.new(/\w+/)
+          expect(regex).to match("κλμ")
+        end
+
+        it "like κ" do
+          regex = Gregex.new(/\w+/)
+          expect(regex).to match("κ")
+        end
+      end
+    end
+
+    context "with \/\\w{2}\/" do
+      describe "matches exact 2 greek chars" do
+        it "like κλμ" do
+          regex = Gregex.new(/\w{2}/)
+          expect(regex).to match("κλμ")
+          expect(regex).not_to match("κ λ μ")
         end
       end
     end
