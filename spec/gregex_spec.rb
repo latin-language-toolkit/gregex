@@ -70,5 +70,19 @@ describe Gregex do
         end
       end
     end
+
+    context "with \/\\S\/" do
+      describe "matches any non white-space-char" do
+        it "like κλμ" do
+          regex = Gregex.new(/\S/)
+          expect(regex).to match("κλμ")
+        end
+
+        it "like ." do
+          regex = Gregex.new(/\S/)
+          expect(regex).to match(".")
+        end
+      end
+    end
   end
 end
