@@ -17,14 +17,30 @@ describe Gregex do
         ἅ ἥ ἕ ἵ ὅ ὕ ὥ
         ᾀ ᾁ ᾂ ᾃ ᾄ ᾅ ᾆ ᾇ ᾐ ᾑ ᾒ ᾓ ᾔ ᾕ ᾖ ᾗ ᾠ ᾡ ᾢ ᾣ ᾤ ᾥ ᾦ ᾧ )
 
+   all_capital_letters = %w(
+        Α Ε Η Ι Ο Υ Ω
+        Ἀ Ἁ Ἂ Ἃ Ἄ Ἅ Ἆ Ἇ ᾈ ᾉ ᾊ ᾋ ᾌ ᾍ ᾎ ᾏ
+        Ἐ Ἑ Ἒ Ἓ Ἔ Ἕ
+        Ἠ Ἡ Ἢ Ἣ Ἤ Ἥ Ἦ Ἧ ᾘ ᾙ ᾚ ᾛ ᾜ ᾝ ᾞ ᾟ
+        Ἰ Ἱ Ἲ Ἳ Ἴ Ἵ Ἶ Ἷ
+        Ὀ Ὁ Ὂ Ὃ Ὄ Ὅ
+        Ὑ Ὓ Ὕ Ὗ
+        Ὠ Ὡ Ὢ Ὣ Ὤ Ὥ Ὦ Ὧ ᾨ ᾩ ᾪ ᾫ ᾬ ᾭ ᾮ ᾯ)
+
   it 'should have a version number' do
     Gregex::VERSION.should_not be_nil
   end
 
   describe ".new" do
-    context "with \w" do
+    context "with \\w" do
       regex = Gregex.new(/\w/)
       all_downcase_letters.each do |letter|
+        it "matches #{letter}" do
+          expect(regex).to match(letter)
+        end
+      end
+
+      all_capital_letters.each do |letter|
         it "matches #{letter}" do
           expect(regex).to match(letter)
         end

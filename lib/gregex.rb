@@ -38,10 +38,31 @@ module Gregex
     SPIRITUS_WITH_IOTA
   ].flatten
 
+  PLAIN_CAPITALS = %w(Α Ε Η Ι Ο Υ Ω)
+  A_WITH_DIACR = %w(Ἀ Ἁ Ἂ Ἃ Ἄ Ἅ Ἆ Ἇ ᾈ ᾉ ᾊ ᾋ ᾌ ᾍ ᾎ ᾏ)
+  E_WITH_DIACR = %w(Ἐ Ἑ Ἒ Ἓ Ἔ Ἕ)
+  H_WITH_DIACR = %w(Ἠ Ἡ Ἢ Ἣ Ἤ Ἥ Ἦ Ἧ ᾘ ᾙ ᾚ ᾛ ᾜ ᾝ ᾞ ᾟ)
+  I_WITH_DIACR = %w(Ἰ Ἱ Ἲ Ἳ Ἴ Ἵ Ἶ Ἷ)
+  O_WITH_DIACR = %w(Ὀ Ὁ Ὂ Ὃ Ὄ Ὅ)
+  Y_WITH_DIACR = %w(Ὑ Ὓ Ὕ Ὗ)
+  W_WITH_DIACR = %w(Ὠ Ὡ Ὢ Ὣ Ὤ Ὥ Ὦ Ὧ ᾨ ᾩ ᾪ ᾫ ᾬ ᾭ ᾮ ᾯ)
+
+  CAPITALS = [
+    PLAIN_CAPITALS,
+    A_WITH_DIACR,
+    E_WITH_DIACR,
+    H_WITH_DIACR,
+    I_WITH_DIACR,
+    O_WITH_DIACR,
+    Y_WITH_DIACR,
+    W_WITH_DIACR,
+  ].flatten
+
   ALL = [
     VOWELS,
     CONSONANTS,
-    VOWELS_WITH_SPIRITUS
+    VOWELS_WITH_SPIRITUS,
+    CAPITALS
   ].flatten
 
   MAP = { '\w' => ALL }
