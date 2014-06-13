@@ -1,7 +1,10 @@
 module Gregex
   class RegexParser
 
-    MAP = { '\w' => Gregex::Constants::ALL }
+    MAP = { '\w' => Gregex::Constants::ALL,
+            '[α-ω]' => Gregex::Constants::VOWELS + Gregex::Constants::VOWELS_WITH_SPIRITUS,
+            '[β-ψ]' => Gregex::Constants::CONSONANTS,
+    }
 
     def initialize(original)
       @original = original
@@ -9,13 +12,15 @@ module Gregex
 
     def parse
       regex = @original.source
+      parsed = ""
       MAP.each do |meta, resolved_meta|
         if regex.match(meta)
           string = create_regex(resolved_meta)
-          regex.gsub!(meta, string)
+        #require 'pry'; binding.pry
+          parsed = regex.gsub(meta, string)
         end
       end
-      regex
+      parsed
     end
 
     def finish_regex(string)

@@ -1,23 +1,25 @@
 require 'spec_helper'
 
 describe Gregex do
-  all_downcase_letters = %w(α ε ι η ο υ ω
-        β γ δ ζ θ κ λ μ ν ξ π ρ ῥ ῤ σ ς τ φ χ ψ
-        ά έ ή ί ó ύ ώ
-        ὰ ὲ ὴ ì ò ὺ ὼ
-        ᾶ ῆ ῖ ῦ ῶ
-        ἂ ἒ ἲ ἢ ὂ ὒ ὢ
-        ᾲ ᾳ ᾴ ᾷ ῂ ῃ ῄ ῇ ῲ ῳ ῴ ῷ
-        ἀ ἐ ἠ ἰ ὀ ὐ ὠ
-        ἄ ἔ ἴ ἤ ὄ ὔ ὤ
-        ἆ ἶ ἦ ὖ ὦ
-        ἁ ἑ ἡ ἱ ὁ ὑ ὡ
-        ἇ ἷ ἧ ὗ ὧ
-        ἃ ἣ ἓ ἳ ὃ ὓ ὣ
-        ἅ ἥ ἕ ἵ ὅ ὕ ὥ
-        ᾀ ᾁ ᾂ ᾃ ᾄ ᾅ ᾆ ᾇ ᾐ ᾑ ᾒ ᾓ ᾔ ᾕ ᾖ ᾗ ᾠ ᾡ ᾢ ᾣ ᾤ ᾥ ᾦ ᾧ )
+  vowels = %w(α ε ι η ο υ ω
+              ά έ ή ί ó ύ ώ
+              ὰ ὲ ὴ ì ò ὺ ὼ
+              ᾶ ῆ ῖ ῦ ῶ
+              ἂ ἒ ἲ ἢ ὂ ὒ ὢ
+              ᾲ ᾳ ᾴ ᾷ ῂ ῃ ῄ ῇ ῲ ῳ ῴ ῷ
+              ἀ ἐ ἠ ἰ ὀ ὐ ὠ
+              ἄ ἔ ἴ ἤ ὄ ὔ ὤ
+              ἆ ἶ ἦ ὖ ὦ
+              ἁ ἑ ἡ ἱ ὁ ὑ ὡ
+              ἇ ἷ ἧ ὗ ὧ
+              ἃ ἣ ἓ ἳ ὃ ὓ ὣ
+              ἅ ἥ ἕ ἵ ὅ ὕ ὥ
+              ᾀ ᾁ ᾂ ᾃ ᾄ ᾅ ᾆ ᾇ ᾐ ᾑ ᾒ ᾓ ᾔ ᾕ ᾖ ᾗ ᾠ ᾡ ᾢ ᾣ ᾤ ᾥ ᾦ ᾧ)
 
-   all_capital_letters = %w(
+  consonants = %w(β γ δ ζ θ κ λ μ ν ξ π ρ ῥ ῤ σ ς τ φ χ ψ)
+  all_downcase_letters = vowels + consonants
+
+  all_capital_letters = %w(
         Α Ε Η Ι Ο Υ Ω
         Ἀ Ἁ Ἂ Ἃ Ἄ Ἅ Ἆ Ἇ ᾈ ᾉ ᾊ ᾋ ᾌ ᾍ ᾎ ᾏ
         Ἐ Ἑ Ἒ Ἓ Ἔ Ἕ
@@ -81,6 +83,28 @@ describe Gregex do
         it "like ." do
           regex = Gregex.new(/\S/)
           expect(regex).to match(".")
+        end
+      end
+    end
+
+    context "with \/[]\/" do
+      describe "matches group of chars" do
+        describe "like [α-ω]" do
+          regex = Gregex.new(/[α-ω]/)
+          vowels.each do |vow|
+            it "matches #{vow}" do
+              expect(regex).to match(vow)
+            end
+          end
+        end
+
+        describe "like [β-ψ]" do
+          regex = Gregex.new(/[β-ψ]/)
+          consonants.each do |con|
+            it "matches #{con}" do
+              expect(regex).to match(con)
+            end
+          end
         end
       end
     end
