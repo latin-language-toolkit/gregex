@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Gregex do
+  plain_vowels = %w(α ε ι η ο υ ω)
+    vowels_with_acute = %w(ά έ ή ί ó ύ ώ)
+    vowels_with_grave = %w(ὰ ὲ ὴ ì ò ὺ ὼ)
+    vowels_with_circumflex = %w(ᾶ ῆ ῖ ῦ ῶ)
   vowels = %w(α ε ι η ο υ ω
               ά έ ή ί ó ύ ώ
               ὰ ὲ ὴ ì ò ὺ ὼ
@@ -91,7 +95,7 @@ describe Gregex do
       describe "matches group of chars" do
         describe "like [α-ω]" do
           regex = Gregex.new(/[α-ω]/)
-          vowels.each do |vow|
+          plain_vowels.each do |vow|
             it "matches #{vow}" do
               expect(regex).to match(vow)
             end
@@ -103,6 +107,33 @@ describe Gregex do
           consonants.each do |con|
             it "matches #{con}" do
               expect(regex).to match(con)
+            end
+          end
+        end
+
+        describe "like [ά-ώ]" do
+          regex = Gregex.new(/[ά-ώ]/)
+          vowels_with_acute.each do |vow|
+            it "matches #{vow}" do
+              expect(regex).to match(vow)
+            end
+          end
+        end
+
+        describe "like [ὰ-ὼ]" do
+          regex = Gregex.new(/[ὰ-ὼ]/)
+          vowels_with_grave.each do |vow|
+            it "matches #{vow}" do
+              expect(regex).to match(vow)
+            end
+          end
+        end
+
+        describe "like [ᾶ-ῶ]" do
+          regex = Gregex.new(/[ᾶ-ῶ]/)
+          vowels_with_circumflex.each do |vow|
+            it "matches #{vow}" do
+              expect(regex).to match(vow)
             end
           end
         end
