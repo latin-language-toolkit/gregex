@@ -9,12 +9,17 @@ module Gregex
             '[β-ψ]' => Gregex::Constants::CONSONANTS,
     }
 
-    def initialize(original)
+    def initialize(original, options)
       @original = original
+      @options = options
+    end
+
+    def original_options
+      @original.options
     end
 
     def parse
-      regex = @original.source
+      regex = @original
       parsed = ""
       MAP.each do |meta, resolved_meta|
         if regex.match(meta)
