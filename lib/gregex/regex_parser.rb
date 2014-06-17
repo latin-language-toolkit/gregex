@@ -9,17 +9,27 @@ module Gregex
             '[β-ψ]' => Gregex::Constants::CONSONANTS,
     }
 
+    attr_reader :options
+
     def initialize(original, options)
       @original = original
-      @options = options
+      @options = options || ""
     end
 
     def original_options
-      @original.options
+      int = @original.options
+      if int.odd? && !check_options("i")
+        @options << "i"
+        @original.options -= 1
+      end
+    end
+
+    def check_options(arg)
+      true if @options.match(/#{arg}/)
     end
 
     def parse
-      regex = @original
+      regex = @original.source
       parsed = ""
       MAP.each do |meta, resolved_meta|
         if regex.match(meta)
