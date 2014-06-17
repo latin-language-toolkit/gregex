@@ -3,25 +3,28 @@ module Gregex
 
     MAP = { '\w' => Gregex::Constants::ALL,
             '[α-ω]' => Gregex::Constants::PLAIN_VOWELS,
+            #'[^α-ω]' => Gregex::Constants::CONSONANTS,
             '[ά-ώ]' => Gregex::Constants::VOWELS_WITH_ACUTE,
             '[ὰ-ὼ]' => Gregex::Constants::VOWELS_WITH_GRAVE,
             '[ᾶ-ῶ]' => Gregex::Constants::VOWELS_WITH_CIRCUMFLEX,
             '[β-ψ]' => Gregex::Constants::CONSONANTS,
     }
 
-    attr_reader :options
-
     def initialize(original, options)
       @original = original
-      @options = options || ""
+      @options = options
     end
 
-    def original_options
+    def parse_options
       int = @original.options
       if int.odd? && !check_options("i")
         @options << "i"
-        @original.options -= 1
       end
+    end
+
+    def options
+      parse_options
+      if @options.empty? then 0 else @options end
     end
 
     def check_options(arg)
