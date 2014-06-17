@@ -102,6 +102,15 @@ describe Gregex do
           end
         end
 
+        describe "like [^α-ω]" do
+          regex = Gregex.new(/[^α-ω]/)
+          consonants.each do |con|
+            xit "matches #{con}" do
+              expect(regex).to match(con)
+            end
+          end
+        end
+
         describe "like [β-ψ]" do
           regex = Gregex.new(/[β-ψ]/)
           consonants.each do |con|
