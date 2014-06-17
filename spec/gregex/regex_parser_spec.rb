@@ -12,6 +12,15 @@ describe Gregex::RegexParser do
         a = Gregex.new(/a/, "i")
         expect(a).to match("A")
       end
+
+      it "with i only given as regex option" do
+        a = Gregex.new(/a/i)
+        expect(a).to match("A")
+      end
+      it "with i only given as option" do
+        a = Gregex.new(/a/, "i")
+        expect(a).to match("A")
+      end
     end
   end
 end
