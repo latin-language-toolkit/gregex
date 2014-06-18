@@ -148,5 +148,14 @@ describe Gregex do
         end
       end
     end
+
+    context "with complex expressions" do
+      describe "like \/\\w[α-ω]\/" do
+        it "matches βω" do
+          regex = Gregex.new(/\w[α-ω]/)
+          expect(regex).to match("βω")
+        end
+      end
+    end
   end
 end

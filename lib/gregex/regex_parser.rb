@@ -33,15 +33,20 @@ module Gregex
 
     def parse
       regex = @original.source
-      parsed = ""
-      MAP.each do |meta, resolved_meta|
-        if regex.match(Regexp.escape(meta))
-          string = create_regex(resolved_meta)
-        #require 'pry'; binding.pry
-          parsed = regex.gsub(meta, string)
-        end
+      match_pairs = create_matching_regex_patterns
+      match_pairs.keys.each do |k|
+        regex.gsub!(k, match_pairs)
       end
-      parsed
+      regex
+    end
+
+    def create_matching_regex_patterns
+      MAP.each_with_object({}) do |(meta, resolved_meta), hsh|
+        key = meta
+        value = create_regex(resolved_meta)
+        hsh[key] = value
+        hsh
+      end
     end
 
     def finish_regex(string)
