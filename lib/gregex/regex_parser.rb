@@ -35,7 +35,7 @@ module Gregex
       regex = @original.source
       parsed = ""
       MAP.each do |meta, resolved_meta|
-        if regex.match(meta)
+        if regex.match(Regexp.escape(meta))
           string = create_regex(resolved_meta)
         #require 'pry'; binding.pry
           parsed = regex.gsub(meta, string)
