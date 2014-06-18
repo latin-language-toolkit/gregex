@@ -15,22 +15,6 @@ module Gregex
       @options = options
     end
 
-    def parse_options
-      int = @original.options
-      if int.odd? && !check_options("i")
-        @options << "i"
-      end
-    end
-
-    def options
-      parse_options
-      if @options.empty? then 0 else @options end
-    end
-
-    def check_options(arg)
-      true if @options.match(/#{arg}/)
-    end
-
     def parse
       regex = @original.source
       match_pairs = create_matching_regex_patterns
@@ -38,6 +22,24 @@ module Gregex
         regex.gsub!(k, match_pairs)
       end
       regex
+    end
+
+    def options
+      parse_options
+      if @options.empty? then 0 else @options end
+    end
+
+    private
+
+    def parse_options
+      int = @original.options
+      if int.odd? && !check_options("i")
+        @options << "i"
+      end
+    end
+
+    def check_options(arg)
+      true if @options.match(/#{arg}/)
     end
 
     def create_matching_regex_patterns
