@@ -4,6 +4,7 @@ module Gregex
   require 'gregex/constants'
   require 'gregex/regex_parser'
   require 'gregex/options'
+  require 'gregex/map'
 
   def self.new(regex, opts = "")
     extended_rgx = RegexParser.new(regex, opts)
