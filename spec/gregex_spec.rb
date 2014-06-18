@@ -157,5 +157,28 @@ describe Gregex do
         end
       end
     end
+
+    context "with options" do
+      describe "with i" do
+        it "is case insensitive" do
+          regex = Gregex.new(/α/, "i")
+          expect(regex).to match ("α")
+          expect(regex).to match ("Α")
+        end
+
+        it "works with [...]" do
+          regex = Gregex.new(/[α-ω]/, "i")
+          expect(regex).to match ("α")
+          expect(regex).to match ("Α")
+        end
+      end
+
+      describe "with c" do
+        it "ignores all diacritics" do
+          regex = Gregex.new(/[α-ω]/, "c")
+          expect(regex).to match ("ά")
+        end
+      end
+    end
   end
 end

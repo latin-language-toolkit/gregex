@@ -13,8 +13,15 @@ module Gregex
     attr_reader :map
 
     def initialize(options)
-      @options = options
-      @map = MAP
+      @opts = options
+      @map = map
+    end
+
+    def map
+      if @opts.check_options("c")
+        then MAP['[α-ω]'] = Gregex::Constants::VOWELS + Gregex::Constants::VOWELS_WITH_SPIRITUS
+      end
+      MAP
     end
   end
 end
