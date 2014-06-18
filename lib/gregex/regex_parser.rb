@@ -10,9 +10,11 @@ module Gregex
             '[β-ψ]' => Gregex::Constants::CONSONANTS,
     }
 
+    attr_reader :options
+
     def initialize(original, options)
       @original = original
-      @options = options
+      @options = Gregex::Options.new(@original.options, options)
     end
 
     def parse
@@ -24,23 +26,7 @@ module Gregex
       regex
     end
 
-    def options
-      parse_options
-      if @options.empty? then 0 else @options end
-    end
-
     private
-
-    def parse_options
-      int = @original.options
-      if int.odd? && !check_options("i")
-        @options << "i"
-      end
-    end
-
-    def check_options(arg)
-      true if @options.match(/#{arg}/)
-    end
 
     def create_matching_regex_patterns
       MAP.each_with_object({}) do |(meta, resolved_meta), hsh|
