@@ -2,6 +2,10 @@ require 'greek_string'
 module Gregex
   class Map
 
+    def self.gs
+      GreekString.new.selection
+    end
+
     MAP = { '\w' => Gregex::Constants::ALL,
             '[α-ω]' => gs.select_by_types("vowel", "plain"),
             '[^α-ω]' => Gregex::Constants::CONSONANTS,
@@ -10,10 +14,6 @@ module Gregex
             '[ᾶ-ῶ]' => Gregex::Constants::VOWELS_WITH_CIRCUMFLEX,
             '[β-ψ]' => Gregex::Constants::CONSONANTS,
     }
-
-    def self.gs
-      GreekString.new.selection
-    end
 
     attr_reader :map
 
@@ -24,7 +24,9 @@ module Gregex
 
     def map
       if @opts.check_options("c")
-        then MAP['[α-ω]'] = Gregex::Constants::VOWELS + Gregex::Constants::VOWELS_WITH_SPIRITUS
+        MAP['[α-ω]'] = Gregex::Constants::VOWELS + Gregex::Constants::VOWELS_WITH_SPIRITUS
+        MAP['ε'] = Gregex::Map.gs.select_by_letter("Epsilon").to_s
+        MAP['υ'] = Gregex::Map.gs.select_by_letter("Ypsilon").to_s
       end
       MAP
     end
