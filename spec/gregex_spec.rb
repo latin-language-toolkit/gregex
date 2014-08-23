@@ -174,9 +174,60 @@ describe Gregex do
       end
 
       describe "with c" do
-        it "ignores all diacritics" do
-          regex = Gregex.new(/[α-ω]/, "c")
-          expect(regex).to match ("ά")
+        context "ignores all diacritics" do
+          it "with \/[α-ω]\/" do
+            regex = Gregex.new(/[α-ω]/, "c")
+            expect(regex).to match ("ά")
+          end
+
+          context "works with all vowels and diacritics" do
+            it "with α" do
+              regex = Gregex.new(/α/, "c")
+              expect(regex).to match ("ά")
+              expect(regex).to match ("ὰ")
+              expect(regex).to match ("ἀ")
+              expect(regex).to match ("ἁ")
+              expect(regex).to match ("ᾶ")
+              expect(regex).to match ("ἄ")
+              expect(regex).to match ("ἂ")
+              expect(regex).to match ("ἃ")
+              expect(regex).to match ("ἅ")
+              expect(regex).to match ("ἆ")
+              expect(regex).to match ("ᾳ")
+              # and some more...
+            end
+
+            it "with ε" do
+              regex = Gregex.new(/ε/, "c")
+              expect(regex).to match ("ἒ")
+            end
+
+            it "with η" do
+              regex = Gregex.new(/η/, "c")
+              expect(regex).to match ("ῇ")
+            end
+
+            it "with ι" do
+              regex = Gregex.new(/ι/, "c")
+              expect(regex).to match ("ί")
+            end
+
+            it "with ο" do
+              regex = Gregex.new(/ο/, "c")
+              expect(regex).to match ("ὸ")
+            end
+
+            it "with υ" do
+              regex = Gregex.new(/υ/, "c")
+              expect(regex).to match ("ὖ")
+            end
+
+            it "with ω" do
+              regex = Gregex.new(/ω/, "c")
+              expect(regex).to match ("ᾦ")
+            end
+
+          end
         end
       end
     end

@@ -1,5 +1,16 @@
 module Gregex
   module Constants
+
+    VOWEL_NAMES = {
+     "α" => "Alpha",
+     "ε" => "Epsilon",
+     "η" => "Eta",
+     "ι" => "Iota",
+     "ο" => "Omikron",
+     "υ" => "Ypsilon",
+     "ω" => "Omega",
+    }
+
     PLAIN_VOWELS = %w(α ε ι η ο υ ω)
     VOWELS_WITH_ACUTE = %w(ά έ ή ί ó ύ ώ)
     VOWELS_WITH_GRAVE = %w(ὰ ὲ ὴ ì ò ὺ ὼ)
