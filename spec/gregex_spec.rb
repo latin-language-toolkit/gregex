@@ -180,5 +180,12 @@ describe Gregex do
         end
       end
     end
+
+    context "with real world examples" do
+      it "matches various variants of οὐδε" do
+        regex = Gregex.new(/ουδε/, "c")
+        expect(regex).to match ("οὐδὲ")
+      end
+    end
   end
 end
