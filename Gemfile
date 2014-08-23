@@ -6,4 +6,4 @@ gem 'pry'
 gemspec
 gem 'coveralls', require: false
 
-gem 'greek_string', path: "../greek_string"
+gem 'greek_string', git: 'git://github.com/latin-language-toolkit/greek_string.git'
