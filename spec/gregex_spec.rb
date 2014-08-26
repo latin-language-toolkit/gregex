@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Gregex do
   plain_vowels = %w(α ε ι η ο υ ω)
-  vowels_with_acute = %w(ά έ ή ί ó ύ ώ)
-  vowels_with_grave = %w(ὰ ὲ ὴ ì ò ὺ ὼ)
+  vowels_with_acute = %w(ά έ ή ί ό ύ ώ)
+  vowels_with_grave = %w(ὰ ὲ ὴ ὶ ὸ ὺ ὼ)
   vowels_with_circumflex = %w(ᾶ ῆ ῖ ῦ ῶ)
   vowels = %w(α ε ι η ο υ ω
-              ά έ ή ί ó ύ ώ
-              ὰ ὲ ὴ ì ò ὺ ὼ
+              ά έ ή ί ό ύ ώ
+              ὰ ὲ ὴ ὶ ὸ ὺ ὼ
               ᾶ ῆ ῖ ῦ ῶ
               ἂ ἒ ἲ ἢ ὂ ὒ ὢ
               ᾲ ᾳ ᾴ ᾷ ῂ ῃ ῄ ῇ ῲ ῳ ῴ ῷ
