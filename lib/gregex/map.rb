@@ -1,4 +1,3 @@
-require 'greek_string'
 class Gregex
   class Map
     require 'gregex/constants'
