@@ -1,12 +1,14 @@
-module Gregex
+class Gregex
   class RegexParser
+    require 'gregex/options'
+    require 'gregex/map'
 
     attr_reader :options
 
-    def initialize(original, options)
+    def initialize(original, options, gs)
       @original = original
       @options = Gregex::Options.new(@original.options, options)
-      @map = Gregex::Map.new(@options).map
+      @map = Gregex::Map.new(@options, gs).map
     end
 
     def parse

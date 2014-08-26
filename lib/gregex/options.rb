@@ -1,5 +1,6 @@
-module Gregex
+class Gregex
   class Options
+
     def initialize(orig, opts)
       @original = orig
       @options = opts
