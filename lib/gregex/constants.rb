@@ -1,4 +1,4 @@
-module Gregex
+class Gregex
   module Constants
 
     VOWEL_NAMES = {

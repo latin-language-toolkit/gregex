@@ -1,13 +1,17 @@
 require "gregex/version"
 
-module Gregex
-  require 'gregex/constants'
+class Gregex
+  require 'greek_string'
   require 'gregex/regex_parser'
-  require 'gregex/options'
-  require 'gregex/map'
 
-  def self.new(regex, opts = "")
-    extended_rgx = RegexParser.new(regex, opts)
+  attr_reader :gs
+
+  def initialize
+    @gs = GreekString.new
+  end
+
+  def regex(regex, opts = "")
+    extended_rgx = RegexParser.new(regex, opts, gs)
     Regexp.new(extended_rgx.parse, extended_rgx.options)
   end
 end

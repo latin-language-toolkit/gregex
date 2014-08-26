@@ -4,22 +4,22 @@ describe Gregex::RegexParser do
   describe "#original_options" do
     describe "checks if option i is given" do
       it "with i in original regex and as option given" do
-        a = Gregex.new(/a/i, "i")
+        a = Gregex.new.regex(/a/i, "i")
         expect(a).to match("A")
       end
 
       it "with i only given as option" do
-        a = Gregex.new(/a/, "i")
+        a = Gregex.new.regex(/a/, "i")
         expect(a).to match("A")
       end
 
       it "with i only given as regex option" do
-        a = Gregex.new(/a/i)
+        a = Gregex.new.regex(/a/i)
         expect(a).to match("A")
       end
 
       it "with i only given as option" do
-        a = Gregex.new(/a/, "i")
+        a = Gregex.new.regex(/a/, "i")
         expect(a).to match("A")
       end
     end
