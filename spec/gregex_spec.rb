@@ -37,7 +37,7 @@ describe Gregex do
     Gregex::VERSION.should_not be_nil
   end
 
-  describe ".gregex" do
+  describe ".regex" do
     context "with \/\\w\/" do
       regex = Gregex.new.regex(/\w/)
       all_downcase_letters.each do |letter|
